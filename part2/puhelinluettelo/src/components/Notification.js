@@ -10,7 +10,7 @@ const Notification = ({ message }) => {
     )
   }
   
-  const Notification_Error = ({ message }) => {
+const Notification_Error = ({ message }) => {
     if (message === null) {
       return null
     }

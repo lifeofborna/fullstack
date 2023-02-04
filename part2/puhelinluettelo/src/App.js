@@ -26,7 +26,7 @@ const App = () => {
     .then(initialPersons => {
       setPersons(initialPersons)
     })
-  })
+  }, [])
 
 
   const deletePerson = id => {
@@ -55,11 +55,10 @@ const App = () => {
         name:newName,
         phone_number:newNumber
       }
-
+      console.log(nameObject)
       personService
       .create(nameObject)
       .then(returnedPersons => {
-        console.log(returnedPersons)
         setPersons(persons.concat(returnedPersons))
         setAddedMessage(
           `Added '${newName}' to the phonebook`
@@ -70,13 +69,14 @@ const App = () => {
         setNewNumber('')
         setNewName('')
 
-      }
-      )
+      })
+      .catch(error => {
+        setErrorMessage(error.response.data.error)
+      })
 
     }
     
     else if (original === true){
-      console.log(original)
       const find_person = persons.find(person => person.name === newName)
       const changedPerson = { ...find_person, phone_number: newNumber }
      
@@ -137,6 +137,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Notification message={addedMessage} />
+
       <Notification_Error message={errorMessage} />
 
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
