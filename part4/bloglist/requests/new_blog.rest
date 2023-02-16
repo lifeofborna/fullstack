@@ -1,0 +1,10 @@
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+
+{
+  "title": "Second try",
+  "author": "Borna",
+  "url": "None",
+  "likes": 5
+}

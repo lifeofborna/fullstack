@@ -7,6 +7,7 @@ app.use(express.static("build"));
 
 app.use(cors());
 require("dotenv").config();
+
 const Person = require("./models/person");
 
 const unknownEndpoint = (request, response) => {
@@ -36,7 +37,7 @@ const errorHandler = (error, request, response, next) => {
 app.use(
   morgan("tiny", {
     skip: function (req, res) {
-      return req.method !== "POST";
+      return req.method !== 'POST';
     },
     stream: {
       write: function (message) {
@@ -146,4 +147,4 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-});
+})
